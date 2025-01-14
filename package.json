@@ -1,0 +1,19 @@
+{
+  "name": "unit-tests",
+  "version": "1.0.0",
+  "description": "This project is an implementation of Rooibos unit test framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'test'",
+    "build-tests": "npx bsc",
+    "build-tdd": "cp src/source/testSuites/* src/source && npx bsc --project ./bsconfig-tests.json"
+  },
+  "author": "Daniel Campillo",
+  "license": "ISC",
+  "dependencies": {
+    "brighterscript": "^0.61.3"
+  },
+  "devDependencies": {
+    "rooibos-roku": "^5.3.6"
+  }
+}

@@ -1,0 +1,25 @@
+namespace TypeGuardHelper
+
+    function isInteger(val as object) as boolean
+        return getInterface(val, "ifInt") <> invalid
+    end function
+
+    function isString(val as object) as boolean
+        return getInterface(val, "ifString") <> invalid
+    end function
+
+    function isfloat(val as object) as boolean
+        return getInterface(val, "ifFloat") <> invalid
+    end function
+
+    function isStringNotEmpty(val as object) as boolean
+        if not TypeGuardHelper.isString(val) then return false
+
+        return val.trim() <> ""
+    end function
+
+    function isAssocArray(val as object) as boolean
+        return getInterface(val, "ifAssociativeArray") <> invalid
+    end function
+
+end namespace

@@ -1,0 +1,36 @@
+namespace testas 
+    @tags("VideoModuleSuite")
+    @suite
+    class VideoModuleTest extends testas.BaseTestSuite
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        @describe("Video module dependencies")
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        @beforeEach
+        function VMT_construct()
+            m.constants = {}
+            m.httpService = {}
+
+            m.video = videoModule(m.constants, m.httpService)
+        end function
+
+
+        @it("Get Video Module")
+        function _()
+            ' m.stub(m.video.httpService_, "getJson", invalid, true)
+            returnValue = {
+                video0: {videoId: "video:mcp:0"}
+                video1: {videoId: "video:mcp:1"}
+                video2: {videoId: "video:mcp:2"}
+            }
+            m.expectOnce(m.video.httpService_, "getJson", ["https://akamai/givemesomevideos", "mp4"], returnValue, true)
+            videos = m.video.getVideoListByFormat("mp4")
+
+            m.assertArrayCount(videos, 3)
+            m.assertArrayContainsAAs(videos, [
+                {videoId: "video:mcp:0"}
+                {videoId: "video:mcp:2"}
+            ])
+        end function
+    end class
+end namespace

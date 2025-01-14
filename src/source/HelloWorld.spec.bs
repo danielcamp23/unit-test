@@ -1,0 +1,50 @@
+namespace testas
+    @tags("SampleTestSuite")
+    @suite
+    class HelloWorldTests extends testas.BaseTestSuite
+  
+      private person
+  
+      protected override function beforeEach()
+        super.beforeEach()
+        m.person = { "name": "Daniel Campillo" }
+        'Do some things here specific to this test
+      end function
+  
+      '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      @only
+      @describe("Group 1")
+      '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  
+      @it("made a person")
+      function _a()
+        m.assertNotEmpty(m.person)
+        m.assertEqual(m.person.name, "Daniel Campillo")
+      end function
+  
+      @it("says hello")
+      function _d()
+        m.expectOnce(m.person, "sayHello", [m.person.name], "hello number 6")
+  
+        response = m.person.sayHello("number 6")
+  
+        m.assertEqual(response, "hello number 6")
+      end function
+  
+      '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      @describe("Group 2")
+      '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  
+      @BeforeEach
+      private function particularPersonBeforeEach()
+        m.beforeEach()
+        m.person.name = "the new number 2"
+      end function
+
+      @it("Typeguard system")
+      function _c()
+        var = ""
+        m.assertTrue(TypeGuardHelper.isStringNotEmpty(var))
+      end function
+    end class
+  end namespace

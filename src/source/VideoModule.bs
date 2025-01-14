@@ -1,0 +1,31 @@
+function videoModule(constants as object, httpService as object)
+    m.constants = constants
+    m.httpService = httpService
+
+    return {
+        ' Private vars
+        constants_: m.constants
+        httpService_: m.httpService
+
+        ' Public API
+        getVideoListByFormat: getVideoListByFormat_
+    }
+end function
+
+function getVideoListByFormat_(format as string) as object
+    videos = []
+
+    result =  m.httpService_.getJson("https://akamai/givemesomevideos", format)
+
+    if TypeGuardHelper.isAssocArray(result)
+        for each item in result
+            videos.push(result[item])
+        end for
+    end if
+
+    ' for i = 0 to 3 - 1
+    '     videos.push({videoId: `video:mcp:${i}`})
+    ' end for
+    
+    return videos
+end function

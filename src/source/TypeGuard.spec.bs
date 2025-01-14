@@ -1,0 +1,40 @@
+namespace testas
+    @tags("TypeguardSuite")
+    @suite
+    class TypeGuardTests extends testas.BaseTestSuite
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        @describe("Basic types test suite")
+        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+        @it("String test: is string")
+        @params("hola")
+        @params("1")
+        @params("")
+        @params("   ")
+        function _(val)
+            m.assertTrue(TypeGuardHelper.isString(val))
+        end function
+
+        @it("String test: is not string")
+        @params(invalid)
+        @params(1)
+        @params(2.2)
+        @params({})
+        @params([])
+        function _(val)
+            m.assertFalse(TypeGuardHelper.isString(val))
+        end function
+
+        @it("String >> empty")
+        @params("")
+        @params("   ")
+        @params(invalid)
+        @params(123)
+        @params({})
+        function _(val)
+            m.assertFalse(TypeGuardHelper.isStringNotEmpty(val))
+        end function
+
+    end class
+
+end namespace

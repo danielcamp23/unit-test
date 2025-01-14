@@ -1,0 +1,33 @@
+
+Function TestSuite__Daniel() as Object
+    this = BaseTestSuite()
+    this.Name = "TestSuite__Daniel"
+
+    this.addTest("CheckStringHelper", TestSuite__CheckStringHelper)
+    this.addTest("Prueba", prueba)
+
+    return this
+End Function
+
+
+function TestCase__Main_CheckDataCount() as String
+    ar = []
+    ?"entro al menos"
+    return m.assertArrayCount(ar.count(), "hola")
+end function
+
+' @Test
+function TestSuite__CheckStringHelper() as string
+    return m.assertTrue(TypeGuardHelper.isStringNotEmpty("h"))
+end function
+
+' @Test
+function prueba() as String
+    ?"Esta es la prueba"
+    return m.assertTrue(true)
+end function
+
+' @BeforeEach
+sub before()
+    ?"beforeeach"
+end sub
